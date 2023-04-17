@@ -33,6 +33,7 @@ main {
   align-items: center;
 }
 .start-container {
+  display: none;
   width: 30rem;
   height: 20rem;
   background-color: #f5bede;
@@ -57,5 +58,14 @@ box-shadow: 10px 10px 21px 7px hsl(0, 0%, 0%, 0.1);
   border: none;
   border-radius: 11px;
   background-color: #267aaa;
+  color: #f5bede;
+}
+
+a:link, a:active {
+  text-decoration: none;
+  color: #f5bede;
+}
+
+a:hover, a:visited {
   color: #f5bede;
 }
