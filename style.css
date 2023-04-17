@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: 'Anton', sans-serif;
+  background-image: url('doraemon.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.start-container {
+  width: 30rem;
+  height: 20rem;
+  background-color: #f5bede;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+border-radius: 9px;
+box-shadow: 10px 10px 21px 7px hsl(0, 0%, 0%, 0.1);
+}
+
+.start-container h1 {
+  font-size: 3rem;
+  margin-bottom: 1.6rem;
+  color: #267aaa;
+}
+
+.btn {
+  padding: 0.8rem 1rem;
+  font-size: 1.6rem;
+  font-family: 'Anton', sans-serif;
+  border: none;
+  border-radius: 11px;
+  background-color: #267aaa;
+  color: #f5bede;
+}
