@@ -80,6 +80,29 @@
 
 
 
+## Functions
+---setQuestion()--
+
+It will take two arguments (parameters): question count (that represents number of question) and random number that will be used to choose the object from _questionBank_.
+
+Inside we declare a variable questionObj that will tale a random object from _questionBank_. And it does so with the help of randNum.
+ _const questionObj = questionsBank[randNum]_;
+
+ Then we want the question from the object to be displayed on our page. We need to choose the element that will hold _textContent_ value of the question-key.
+ We want out content to be dispalyed in the <p id="question">Question 1 Text</p>, and we already have an access to this element storing in the variable _questionContent_.
+ questionContent.textContent = (qCount + 1) + `. ${questionObj.question}`;
+ We get the access to the question string (value) of the object via 
+ _questionObj.question_.
+
+ And now we need to assign options to its content. And again we want it to be displayed in <span id="option1">Option 1</span> so 
+option1.textContent = `${questionObj.option1}`;
+option2.textContent = `${questionObj.option2}`;
+option3.textContent = `${questionObj.option3}`;
+option4.textContent = `${questionObj.option4}`;
+
+
+
+
 - We'll need some way to store the questions in the quiz along with their answers.
 - We'll need to write some logic that moves from one question to another and starts and restarts the quiz.
 - We'll need to do some DOM interaction like handling a click on a button and displaying a question to the user.

@@ -1,5 +1,5 @@
 'use strict'
-// 1. Setting and initializing variables:
+//------ 1. Setting and initializing variables:
 
 const questionCount = 0; 
 // As we have number of questions, indicationg that there 10 questions needed to be displayed;
@@ -33,7 +33,7 @@ const secondsInput = 10;
 const seconds = secondsInput;
 // secondsInput will be reducing to 0 (and it will go on negative) but we also need an original value once a new question is displayed;
 
-const timer;
+let timer;
 // It will hold a timer element that we display in out footer part. Every time _countDown_ creates a new timer it will be loaded in timer variable. 
 
 
@@ -68,3 +68,24 @@ const resultContent = document.querySelector('#result');
 // Once the game quiz is over the result content needed to be displayed;
 const btnPalyAgain = document.querySelector('#play-again-btn');
 // // To be able to paly again once button clicked;
+
+
+
+// ----- 2. Load current question to the app:
+// Before we can do it we need a function that will set a question and options, a function that will set options to defaul color when a player moves to the next question, a function that changes a question number display:
+
+// 1. Function that sets a question and options
+function setQuestion(qCount, randNum) {
+  const questionObj = questionsBank[randNum];
+  questionContent.textContent = (qCount + 1) + `. ${questionObj.question}`;
+
+  option1.textContent = `${questionObj.option1}`;
+  option2.textContent = `${questionObj.option2}`;
+  option3.textContent = `${questionObj.option3}`;
+  option4.textContent = `${questionObj.option4}`;
+}
+
+setQuestion(0, 4);
+
+// By declaring _var question_ we get a random object from our _questionsBank_, and this variable will keep that value, and then we can use this variable to display random question;
+
