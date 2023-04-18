@@ -16,6 +16,8 @@
 
 ## Optional:
 - To add an _anime preference function_, where a player can choose what anime quiz game they want to play;
+- Create, for example, 30 questions, but only 10 of them will be used in one set of the game.
+- Create a record of names and scores, save them;
 
 ## Class, properties, methods
 - class Player {
@@ -62,6 +64,20 @@
 </div>
 
 - <footer> which holds the text that will be manupilating via JS as well as timer.
+
+---JavaScript---
+- Need questions.js that will be my questions bank, and it will hold objects, i need to put it first as it is a data file and if js does not load it fisrt the error might occurr;
+- Need script.js that will hold the rest of the code, DOM manupilation;
+- Creating _questions.js_ first, inside i declare variable _questionsBank that will be an array holding multiple objects. Each object consists of question property, 4 option properties and answers property with respective values (so creating key-value). There are going to be 10 objects as i want to have 10 questions (levelup: see optionns). 
+- After the Bank is done, move to the script code. It will consists of 7 parts: 
+1. Set and initialize variables;
+2. Load current questions into the app, create a function the will load the questions;
+3. Create functions we need - setting the tracker/progress, changing the dispaly fro none to block/from block to none, calculating and dispalying final score;
+4. Generate random number (via number of the object from the array), unused number (so there are no repeats) and set timer
+5. Making the option selection work (changing color depending on the answer);
+6. When _the next button_ is clicked, load the next question;
+7. _Play Again_ button clicked, refresh page, what happens; seeting up random question number again;
+
 
 
 - We'll need some way to store the questions in the quiz along with their answers.
