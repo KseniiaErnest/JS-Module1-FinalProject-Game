@@ -100,6 +100,16 @@ option2.textContent = `${questionObj.option2}`;
 option3.textContent = `${questionObj.option3}`;
 option4.textContent = `${questionObj.option4}`;
 
+--- changeTheNumberQuestionBar()---
+
+This function is gonna change question number in the footer + show a color live-question in the progress/track bar.
+This function accepts one argument and its a question number (question count). 
+We want our footer question number to be displated in <p id="number-question">Question 1 of 10</p>, and we already have an access to it via _const questionNumber_, so now we need to asign the text content: questionNumber.textContent = `Question ${qCount + 1} of 10`;
+(we do ${qCount + 1} because its gonna be dynamic and our number changes +1 every time we go to the next question);
+Now we gonna use our variable progressTrack and 1. assign it a node from our HTML file depending on the qCount, and we do that by 
+_progressTrack = document.querySelector(`#number${qCount + 1}`)_ Use of template literal to concatenate part of the id and qCount + 1;
+And then we need to make sure that the live-number of the question changes color to _now-question_, and in our case its #fad61d;
+_progressTrack.style.backgroundColor = '#fad61d'_
 
 
 

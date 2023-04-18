@@ -2,7 +2,7 @@
 //------ 1. Setting and initializing variables:
 
 const questionCount = 0; 
-// As we have number of questions, indicationg that there 10 questions needed to be displayed;
+// As we have number of questions, indicationg that there are 10 questions needed to be displayed;
 
 const score = 0;
 // Start from 0 as a player have not scored anything yet, but as a player progress _score_ will be incremented, and in the end of the game final _score_ will be displayed;
@@ -23,7 +23,7 @@ const statusOfRandNum = 0;
 // It will be used together/while with random question number. If the random numbers is already in the record, then the status = 0, and the new number is needed to be generated. But once a new random number generated and its not in the record array, the status changes to 1, and the loop stops as we do not need the new number. Until the random number is not accepted the status = 0, once it accepted status = 1;
 
 let progressTrack;
-// In order to change colors (depending on the answer) of the progress tracker, we need to get question number, for example, if we have question 1 then progress tracker 1 shoud have some color. Every time we get a new progress tracker it is going to be placed in that variable (it hold the current progress tracker);
+// In order to change colors (depending on the answer) of the progress tracker bar, we need to get question number, for example, if we have question 1 then progress tracker 1 shoud have some color. Every time we get a new progress tracker it is going to be placed in that variable (it hold the current progress tracker);
 
 let countDown;
 // it will have a timer function that will be called every time a new question is loaded, and it will be used to stop a timer function;
@@ -85,7 +85,16 @@ function setQuestion(qCount, randNum) {
   option4.textContent = `${questionObj.option4}`;
 }
 
+// 2. Function that changes the progress bar numbers 
+
+function changeTheNumberQuestionBar(qCount) {
+  questionNumber.textContent = `Question ${qCount + 1} of 10`;
+  progressTrack = document.querySelector(`#number${qCount + 1}`);
+  progressTrack.style.backgroundColor = '#fad61d';
+}
+
 setQuestion(0, 4);
+changeTheNumberQuestionBar(6);
 
 // By declaring _var question_ we get a random object from our _questionsBank_, and this variable will keep that value, and then we can use this variable to display random question;
 
