@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,7 +12,6 @@ html {
 body {
   font-family: 'Anton', sans-serif;
   color: #000000;
-  background-image: url('pikachu.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -25,9 +24,9 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
-}
+} */
 /* ------------------------------------------------------------------------------ */
-main {
+/* main {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -35,6 +34,7 @@ main {
 }
 
 #quiz-game {
+  display: none;
   background-color: #E19720 ;
   width: 60rem;
   border-radius: 11px;
@@ -107,7 +107,7 @@ hr {
 }
 
 .button:hover {
-  background-color: #fad61d;
+  background-color: rgb(250, 214, 29);
 }
 
 #btn-next {
@@ -121,16 +121,16 @@ padding: 1rem 1rem 1rem 1rem;
 border-radius: 15px;
 border: 2px solid #000000;
 cursor: pointer;
-}
+} */
 
-#result-box {
+/* #result-box {
 display: none;
 /* will be visible via JS when the game is over  */
-text-align: center;
-}
+/* text-align: center; */
+/* } */ 
 
 
-.positioning {
+/* .positioning {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -166,4 +166,4 @@ footer {
 #number-question {
   margin-bottom: 0.5rem;
 }
-
+ */

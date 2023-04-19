@@ -18,13 +18,65 @@
     <h1>Anime Quiz Game</h1>
     <label id="player-name">Your name</label>
     <input type="text" name="name" id="name-input">
-    <button class="btn"><a href="index-game.html">Lets start!</a></button>
+    <button class="btn">Lets start!</button>
 </div>
 
+
+</div>
+
+<!-- Game Screen -->
+<div id="quiz-game">
+  <header>
+    <h1 class="heading">Anime Quiz Game</h1>
+  </header>
+
+  <!-- <div id="game-progress">
+    <div class="numbers" id="number1">1</div>
+    <div class="numbers" id="number2">2</div>
+    <div class="numbers" id="number3">3</div>
+    <div class="numbers" id="number4">4</div>
+    <div class="numbers" id="number5">5</div>
+    <div class="numbers" id="number6">6</div>
+    <div class="numbers" id="number7">7</div>
+    <div class="numbers" id="number8">8</div>
+    <div class="numbers" id="number9">9</div>
+    <div class="numbers" id="number10">10</div>
+  </div> -->
+
+  
+
+  <div id="quiz-questions">
+    <p id="question">Question 1 Text</p>
+    <div class="opt" id="answers-opt">
+      <button id="btn1" class="button"><span id="option1">Option 1</span></button>
+      <button id="btn2" class="button"><span id="option2">Option 2</span></button>
+      <button id="btn3" class="button"><span id="option3">Option 3</span></button>
+      <button id="btn4" class="button"><span id="option4">Option 4</span></button>
+    </div>
+    <button id="btn-next">Next Question</button>
+  </div>
+
+  <!-- The box shows results after the quiz is over; hidden in the start, but will be visible and replaces #game-progress container -->
+  <div id="result-box">
+    <div class="positioning">
+    <p id="result">Result Text</p>
+    <button id="play-again-btn">Play again!</button>
+  </div>
+
+  </div>
+
+  
+
+  <footer>
+    <p id="number-question">Question 1 of 10</p>
+    <div id="time">Timer</div>
+  </footer>
 
 </div>
 
 </main>
-  
+
+<script src="javascript/questions.js"></script>
+<script src="javascript/script.js"></script>
 </body>
 </html>
