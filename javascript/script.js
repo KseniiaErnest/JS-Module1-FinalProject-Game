@@ -42,6 +42,7 @@ let timer;
 
 const quizQuestions = document.querySelector('#quiz-questions'); 
 const quizGame = document.querySelector('#quiz-game');
+const resultBox = document.querySelector('#result-box');
 
 const questionContent = document.querySelector('#question')
 // So we can dynamically change questions content;
@@ -62,7 +63,10 @@ const btn = document.querySelector('#btn-next');
 // To be able to change question once button clicked;
 
 const questionNumber = document.querySelector('#number-question');
-// To dynamically change question numbers and diplay them;
+// To dynamically change question numbers and didplay them;
+
+const timerD = document.querySelector('#timer');
+// To change timer to 00:00 when the result box is diplayed;
 
 const resultContent = document.querySelector('#result');
 // Once the game quiz is over the result content needed to be displayed;
@@ -121,7 +125,46 @@ startTimer(seconds, 'timer');
 
 }
 
-// loadQuestions(10, 3);
 
-// By declaring _var question_ we get a random object from our _questionsBank_, and this variable will keep that value, and then we can use this variable to display random question;
+// ----- 3. Function for setting tracker, setting result, calculating and dispalying final score
+
+// 1. Function for set a correct answer color + score update
+
+function setCorrectAnswerC() {
+  score++;
+  progressTrack.style.backgroundColor = '#5F8D4E';
+}
+
+// 2. Function for set wrong answer color
+
+function setWrongAnswerC() {
+  progressTrack.style.backgroundColor = '#F62D14';
+}
+
+// 3. Function to dipslay a final score + the text when we press the button 
+
+function setFinalScore() {
+  if (score > 7) {
+    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${score}!`
+  } else if (score >= 5 && score <=7) {
+    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${score}!`;
+  } else if (score >= 3 && score < 5) {
+    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${score}!`;
+  } else {
+    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${score}!`;
+  }
+}
+
+// 4. Function to display a result page (switch screens)
+
+function displayResultScreen() {
+  quizQuestions.style.display = 'none';
+  resultBox.style.display = 'block';
+  questionNumber.textContent = 'Anime Quiz is completed';
+  timerD.textContent = '00:00';
+  
+  setFinalScore();
+
+}
+
 

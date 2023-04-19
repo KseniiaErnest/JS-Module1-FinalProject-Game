@@ -128,7 +128,24 @@ First, we set a condition that says if there is a last question (qCount === 9), 
 
 Next step is to not allow more than 10 questions, and the condition for that is to say: if qCount is greater than 9, then we stop the function (return - because we know that after _return_ the function stops its execution);
 
-After that we call back the 3 fucntions that we created before and add one more _startTimer(seconds, 'timer') that we will declare later; seconds that assigned to secondsInput and starts the countdown from 10, and 'timer 
+After that we call back the 3 fucntions that we created before and add one more _startTimer(seconds, 'timer') that we will declare later; seconds that assigned to secondsInput and starts the countdown from 10, and 'timer ;
+
+
+--- setCorrectAnswerC() ---
+
+This function sets the color of the progress track number to green if the answer is correct + adds a point to the score;
+
+--- setWrongAnswerC() ---
+
+This function sets the color of the progress track number to red if the answer is wrong;
+
+--- setFinalScore() ---
+
+This function depending on the score sets the text content and final score, we use if statements;
+
+--- displayResultScreen() ---
+
+This function displays result box, and hiddes the question box + changes the text content of question number content + changes timer content to 00:00, and invokes setFinalScore()
 
 
 

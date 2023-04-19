@@ -126,6 +126,7 @@ cursor: pointer;
 #result-box {
 display: none;
 /* will be visible via JS when the game is over  */
+text-align: center;
 }
 
 
