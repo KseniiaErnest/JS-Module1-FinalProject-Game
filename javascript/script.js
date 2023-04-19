@@ -66,8 +66,8 @@ const questionNumber = document.querySelector('#number-question');
 
 const resultContent = document.querySelector('#result');
 // Once the game quiz is over the result content needed to be displayed;
-const btnPalyAgain = document.querySelector('#play-again-btn');
-// // To be able to paly again once button clicked;
+const btnPlayAgain = document.querySelector('#play-again-btn');
+// // To be able to play again once button clicked;
 
 
 
@@ -93,8 +93,35 @@ function changeTheNumberQuestionBar(qCount) {
   progressTrack.style.backgroundColor = '#fad61d';
 }
 
-setQuestion(0, 4);
-changeTheNumberQuestionBar(6);
+// 3. Function that will turn our options color to default color;
+function tunrColorsToDeafault() {
+  btn1.style.backgroundColor = '#fdefa5';
+  btn2.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+}
+
+// 4. Function that will load questions and options (via calling the three functions above)
+function loadQuestions(qCount, rand) {
+
+if(qCount === 9) {
+    btn.textContent = 'Check the score!';
+    btn.style.backgroundColor = '#F62D14';
+}
+
+if (qCount > 9) {
+  return; 
+}
+
+setQuestion(qCount, rand);
+changeTheNumberQuestionBar(qCount);
+tunrColorsToDeafault();
+
+startTimer(seconds, 'timer');
+
+}
+
+// loadQuestions(10, 3);
 
 // By declaring _var question_ we get a random object from our _questionsBank_, and this variable will keep that value, and then we can use this variable to display random question;
 

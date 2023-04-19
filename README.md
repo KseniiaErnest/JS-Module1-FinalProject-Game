@@ -7,17 +7,19 @@
     - inheritance if any
 
 ## Game 'Anime Quiz' description and goal, logic breakdown
-- The game checks players's knowledge about anime;
-- There are questions with multiple choice answers (in this game there are going to be 3 possible answers);
-- Number of players: 2;
-- Players switch turns and earn points;
-- The players with the highest score wins;
-- The game has _start screen_, _game screen_, _end screen_
+- The game checks player's knowledge about anime;
+- There are questions with multiple choice answers (in this game there are going to be 4 possible answers);
+- Number of players 1 (* check Optional)
+- For each correct answer 1 point
+- The game has _start screen_, _game screen_, _result screen_ that will be displayed inside _game screen_ after all questions are answered;
+- There is a _questionBank_ with big number of questions but one game - 10 random questions dispalyed one after another.
+-There is going to be a progress track bar that shows _now question_ -  yellow, then if the answer is correct it changes to green, if the answer is wrong it changes to red;
+- Add timer to countdown a time for each answer. If a player does not choose answer, it automatically becomes wrong answer- no points
 
 ## Optional:
 - To add an _anime preference function_, where a player can choose what anime quiz game they want to play;
-- Create, for example, 30 questions, but only 10 of them will be used in one set of the game.
 - Create a record of names and scores, save them;
+- Create 2 player game; -Players switch turns and earn points;
 
 ## Class, properties, methods
 - class Player {
@@ -109,7 +111,24 @@ We want our footer question number to be displated in <p id="number-question">Qu
 Now we gonna use our variable progressTrack and 1. assign it a node from our HTML file depending on the qCount, and we do that by 
 _progressTrack = document.querySelector(`#number${qCount + 1}`)_ Use of template literal to concatenate part of the id and qCount + 1;
 And then we need to make sure that the live-number of the question changes color to _now-question_, and in our case its #fad61d;
-_progressTrack.style.backgroundColor = '#fad61d'_
+_progressTrack.style.backgroundColor = '#fad61d'_.
+
+---tunrColorsToDeafault()---
+
+This function turns colors of options to its default color when a player goes to next qurstion.
+To do that we just need to use variabel btn1, btn2, bt3, bt4 (to which we have the access via DOM manupilation) and set them to default colors.
+
+---loadQuestions()---
+It is going to be a big function that when invoked calls other functions - the 3 functions that we created above.
+First, we set a condition that says if there is a last question (qCount === 9), then we need to change the content of the button _next question_ to _Check the result_, and change its color to red: 
+ if(qCount === 9) {
+    btn.textContent = 'Check the score!';
+    btn.style.backgroundColor = '#F62D14';
+}
+
+Next step is to not allow more than 10 questions, and the condition for that is to say: if qCount is greater than 9, then we stop the function (return - because we know that after _return_ the function stops its execution);
+
+After that we call back the 3 fucntions that we created before and add one more _startTimer(seconds, 'timer') that we will declare later; seconds that assigned to secondsInput and starts the countdown from 10, and 'timer 
 
 
 
