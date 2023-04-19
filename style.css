@@ -69,3 +69,14 @@ a:link, a:active {
 a:hover, a:visited {
   color: #f5bede;
 }
+
+#player-name {
+  font-size: 1.8rem;
+  color: #267aaa;
+  margin-bottom: 0.5rem;
+}
+
+#name-input {
+  font-size: 1.4rem;
+  margin-bottom: 1.8rem;
+}
