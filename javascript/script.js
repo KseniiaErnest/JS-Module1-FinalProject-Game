@@ -79,8 +79,8 @@ const btnPlayAgain = document.querySelector('#play-again-btn');
 // Before we can do it we need a function that will set a question and options, a function that will set options to defaul color when a player moves to the next question, a function that changes a question number display:
 
 // 1. Function that sets a question and options
-function setQuestion(qCount, randNum) {
-  const questionObj = questionsBank[randNum];
+function setQuestion(qCount, randomQuestion) {
+  const questionObj = questionsBank[randomQuestion];
   questionContent.textContent = (qCount + 1) + `. ${questionObj.question}`;
 
   option1.textContent = `${questionObj.option1}`;
@@ -106,7 +106,7 @@ function tunrColorsToDeafault() {
 }
 
 // 4. Function that will load questions and options (via calling the three functions above)
-function loadQuestions(qCount, rand) {
+function loadQuestions(qCount, randomQuestion) {
 
 if(qCount === 9) {
     btn.textContent = 'Check the score!';
@@ -117,7 +117,7 @@ if (qCount > 9) {
   return; 
 }
 
-setQuestion(qCount, rand);
+setQuestion(qCount, randomQuestion);
 changeTheNumberQuestionBar(qCount);
 tunrColorsToDeafault();
 
@@ -164,7 +164,27 @@ function displayResultScreen() {
   timerD.textContent = '00:00';
   
   setFinalScore();
+}
 
+// ----- 4. Generate random, unsused number and set timer
+function GenerateRandomNum() {
+  while (statusOfRandNum === 0) {
+    randomQuestion = Math.round(Math.random() * questionsBank.length);
+    if (randomQuestion !== questionsBank.length) {
+      for (let i = 0; i < record.length; i++) {
+        if(randomQuestion === record[i]) {
+          break;
+        }
+        else if (i === record.length - 1) {
+          record[questionCount] = randomQuestion;
+          statusOfRandNum = 1;
+        }
+      }
+    }
+
+  }
+  statusOfRandNum = 0;
+  return randomQuestion;
 }
 
 
