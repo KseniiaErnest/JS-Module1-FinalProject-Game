@@ -161,3 +161,41 @@ This function displays result box, and hiddes the question box + changes the tex
 
 
 
+----- getNewQuestion() -----
+
+questionIndex = avaibleQuestions[randon number/index] = random question itself;
+For example, questionIndex = avaibleQuestions[5] = what question has index 5 in the array avaibleQuestions? - thats going to be our question object;
+questionIndex = 'Question object';
+
+currentQuestion = questionIndex = 'Question object';
+currentQuestion.question = 'Question text';
+
+-- We need to make sure that we do not have repeatings:
+const index1 = avaibleQuestions.indexOf(questionIndex) - we get the index of the current question (that displayed), then we need to remove it from the array so it does not repeat itself
+avaibleQuestions.splice(index1, 1);
+
+----- nextQuestion() -----
+We need to set a limit on how many questions in the test - in this case its 10. So if questionCounter equals to 10, then _quiz is over_ hence _result screen_ is displayed.
+In all other cases we just call getNewQuestion() function. And we connect this function to _next question_ button as we want it to be invoked when we click the button;
+
+
+
+
+switch(e.target.id) {
+  case 'option1': btn2.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+  break;
+  case 'option2': btn1.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+  break;
+  case 'option3': btn1.style.backgroundColor = '#fdefa5';
+  btn2.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+  break;
+  case 'option4': btn1.style.backgroundColor = '#fdefa5';
+  btn2.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+  break;
+}

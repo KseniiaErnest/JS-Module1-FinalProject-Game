@@ -16,10 +16,10 @@ const option3 = document.querySelector('#option3');
 const option4 = document.querySelector('#option4');
 // To dynamically change answer options content;
 
-const btn1 = document.querySelectorAll('#btn1');
-// const btn2 = document.querySelector('#btn2');
-// const btn3 = document.querySelector('#btn3');
-// const btn4 = document.querySelector('#btn4');
+const btn1 = document.querySelector('#btn1');
+const btn2 = document.querySelector('#btn2');
+const btn3 = document.querySelector('#btn3');
+const btn4 = document.querySelector('#btn4');
 // When we choose the option, this option will have the color, and if a palyer changes their answer option, color changes 
 
 const btnNext = document.querySelector('#btn-next');
@@ -41,23 +41,24 @@ let currentQuestion;
 let avaibleQuestions = [];
 
 
-// We push questions from _questionsBank_ into _avaibleQuestions_ array
+// --- We push questions from _questionsBank_ into _avaibleQuestions_ array
 function setAvaibleQuestions() {
-const totalQuestions = questionsBank.length;
-for (let i = 0; i < totalQuestions; i++) {
+// const totalQuestions = questionsBank.length;
+for (let i = 0; i < questionsBank.length; i++) {
   avaibleQuestions.push(questionsBank[i]);
 }
 }
 
-// Set question number and question options
+// --- Set question number and question options
 function getNewQuestion() {
   // Set question number
   questionNumber.innerHTML = `Question ${questionCounter + 1} of 10`;
 
-  // Set question text
+  
   // Get random question
   const questionIndex = avaibleQuestions[Math.floor(Math.random() * avaibleQuestions.length)];
   currentQuestion = questionIndex;
+  // Set question text
   questionContent.textContent = currentQuestion.question;
   
   // Set options text
@@ -74,17 +75,54 @@ function getNewQuestion() {
   console.log(questionIndex);
   console.log(avaibleQuestions);
 
+
   questionCounter++;
 }
 
+// --- To display the next question
 function nextQuestion() {
   if (questionCounter === 10) {
     console.log('quiz is over')
   } else {
     getNewQuestion();
+    tunrColorsToDeafault()
   }
 }
 
+// --- To get e result of the current attempt question
+function getResult(e) {
+const parentEl = e.target.parentElement;
+parentEl.style.backgroundColor = '#5F8D4E';
+
+if (e.target.id === 'option1') {
+  btn2.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+} else if (e.target.id === 'option2') {
+  btn1.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+} else if (e.target.id === 'option3') {
+  btn1.style.backgroundColor = '#fdefa5';
+  btn2.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+} else if (e.target.id === 'option4') {
+  btn1.style.backgroundColor = '#fdefa5';
+  btn2.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+}
+
+}
+
+// --- To set color options to default
+function tunrColorsToDeafault() {
+  btn1.style.backgroundColor = '#fdefa5';
+  btn2.style.backgroundColor = '#fdefa5';
+  btn3.style.backgroundColor = '#fdefa5';
+  btn4.style.backgroundColor = '#fdefa5';
+}
+
+// ----------------------------------------------------------------
 window.onload = function() {
   // _Lets Start_ button is clicked, change to the _game quiz_ screen
   startButton.addEventListener('click', () => {
@@ -95,6 +133,12 @@ window.onload = function() {
 
   // To make work _next question_ button
   btnNext.addEventListener('click', nextQuestion);
+
+  //
+  option1.addEventListener('click', getResult);
+  option2.addEventListener('click', getResult);
+  option3.addEventListener('click', getResult);
+  option4.addEventListener('click', getResult);
 
 
   // 1. We set all questions in _avaibleQuestions_ array 
