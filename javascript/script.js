@@ -66,7 +66,23 @@ function getNewQuestion() {
   option3.textContent = currentQuestion.option3;
   option4.textContent = currentQuestion.option4;
 
+  // Get the position of _questionIndex_ from the _avaibleQuestions_ array
+  const index1 = avaibleQuestions.indexOf(questionIndex);
+  // Remove _questionIndex_ from _avaibleQuestions_ array, so that the question does not repeat
+  avaibleQuestions.splice(index1, 1);
+ 
+  console.log(questionIndex);
+  console.log(avaibleQuestions);
 
+  questionCounter++;
+}
+
+function nextQuestion() {
+  if (questionCounter === 10) {
+    console.log('quiz is over')
+  } else {
+    getNewQuestion();
+  }
 }
 
 window.onload = function() {
@@ -77,11 +93,17 @@ window.onload = function() {
     quizGame.style.display = 'block';
   });
 
+  // To make work _next question_ button
+  btnNext.addEventListener('click', nextQuestion);
+
 
   // 1. We set all questions in _avaibleQuestions_ array 
   setAvaibleQuestions();
-//  2. We call _getNewQuestion()_ function
+//  2. We call _getNewQuestion()_ function to display questions and options
   getNewQuestion();
+
+
+
 }
 
 
