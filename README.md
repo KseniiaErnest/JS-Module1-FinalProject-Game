@@ -175,27 +175,13 @@ const index1 = avaibleQuestions.indexOf(questionIndex) - we get the index of the
 avaibleQuestions.splice(index1, 1);
 
 ----- nextQuestion() -----
-We need to set a limit on how many questions in the test - in this case its 10. So if questionCounter equals to 10, then _quiz is over_ hence _result screen_ is displayed.
+We need to set a limit on how many questions in the test - in this case its 10 (gonna be 9 as we start counting index from 0). So if questionCounter equals to 9, then _quiz is over_ hence _next question_ button becomes check the result is displayed.
++ We need to be sure that a player made a choice, so we set a condition where if all buttons have the default color, then the alert  is displayed.
++ we need options set to default color when we move to the next question so using function _tunrColorsToDeafault()_
++ when we get to the last question and click _check the result_, the result box shoud be diplayed + number of question area changes to _anime quiz is comleted_ + we add _return_ so the counting stops.
 In all other cases we just call getNewQuestion() function. And we connect this function to _next question_ button as we want it to be invoked when we click the button;
 
+----- getRusult(e) -----
 
 
 
-switch(e.target.id) {
-  case 'option1': btn2.style.backgroundColor = '#fdefa5';
-  btn3.style.backgroundColor = '#fdefa5';
-  btn4.style.backgroundColor = '#fdefa5';
-  break;
-  case 'option2': btn1.style.backgroundColor = '#fdefa5';
-  btn3.style.backgroundColor = '#fdefa5';
-  btn4.style.backgroundColor = '#fdefa5';
-  break;
-  case 'option3': btn1.style.backgroundColor = '#fdefa5';
-  btn2.style.backgroundColor = '#fdefa5';
-  btn4.style.backgroundColor = '#fdefa5';
-  break;
-  case 'option4': btn1.style.backgroundColor = '#fdefa5';
-  btn2.style.backgroundColor = '#fdefa5';
-  btn3.style.backgroundColor = '#fdefa5';
-  break;
-}

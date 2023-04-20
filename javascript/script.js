@@ -39,6 +39,7 @@ const btnPlayAgain = document.querySelector('#play-again-btn');
 let questionCounter = 0;
 let currentQuestion;
 let avaibleQuestions = [];
+let score = 0;
 
 
 // --- We push questions from _questionsBank_ into _avaibleQuestions_ array
@@ -52,7 +53,7 @@ for (let i = 0; i < questionsBank.length; i++) {
 // --- Set question number and question options
 function getNewQuestion() {
   // Set question number
-  questionNumber.innerHTML = `Question ${questionCounter + 1} of 10`;
+  questionNumber.textContent = `Question ${questionCounter + 1} of 10`;
 
   
   // Get random question
@@ -81,18 +82,50 @@ function getNewQuestion() {
 
 // --- To display the next question
 function nextQuestion() {
-  if (questionCounter === 10) {
-    console.log('quiz is over')
-  } else {
-    getNewQuestion();
-    tunrColorsToDeafault()
+  if (questionCounter === 9) {
+    btnNext.textContent = 'Check the score!'
+  } else if (btn1.style.backgroundColor === 'rgb(253, 239, 165)' &&
+  btn2.style.backgroundColor === 'rgb(253, 239, 165)' &&
+  btn3.style.backgroundColor === 'rgb(253, 239, 165)' &&
+  btn4.style.backgroundColor === 'rgb(253, 239, 165)') {
+    alert('Please select an option')
+    return;
   }
+
+  if (questionCounter > 9) {
+    displayResultBox();
+    return
+  }
+  getNewQuestion();
+  tunrColorsToDeafault();
+}
+
+// --- Set final score 
+function setFinalScore() {
+  if (score > 7) {
+    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${score}!`
+  } else if (score >= 5 && score <= 7) {
+    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${score}!`;
+  } else if (score >= 3 && score < 5) {
+    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${score}!`;
+  } else {
+    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${score}!`;
+  }
+}
+
+// --- Dispaly final score screen (change screens)
+function displayResultBox() {
+  quizQuestions.style.display = 'none';
+  resultBox.style.display = 'block';
+  questionNumber.textContent = 'Anime Quiz is completed';
+
+  setFinalScore();
 }
 
 // --- To get e result of the current attempt question
 function getResult(e) {
 const parentEl = e.target.parentElement;
-parentEl.style.backgroundColor = '#5F8D4E';
+parentEl.style.backgroundColor = '#fad61d';
 
 if (e.target.id === 'option1') {
   btn2.style.backgroundColor = '#fdefa5';
@@ -114,13 +147,15 @@ if (e.target.id === 'option1') {
 
 }
 
-// --- To set color options to default
+// --- To set color options to default --- call in _newQuestion()_ function
 function tunrColorsToDeafault() {
   btn1.style.backgroundColor = '#fdefa5';
   btn2.style.backgroundColor = '#fdefa5';
   btn3.style.backgroundColor = '#fdefa5';
   btn4.style.backgroundColor = '#fdefa5';
 }
+
+// --- When the last question answered and we clicke
 
 // ----------------------------------------------------------------
 window.onload = function() {
