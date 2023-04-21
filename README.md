@@ -217,4 +217,7 @@ We check if answer the answer is correct or wrong. If correct: setCorrect() + ge
     getNewQuestion();
   }
 
+----- goHomeMenu() -----
+When we click _Home Menu_ button it reloads the test ===> this function is invoked in btnHome.addEventListener();
+
 

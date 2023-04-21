@@ -189,6 +189,9 @@ function setWrong() {
   progressTrack.style.backgroundColor = '#F62D14';
 }
 
+function goHomeMenu() {
+  window.location.reload();
+}
 // ----------------------------------------------------------------
 window.onload = function() {
   // _Lets Start_ button is clicked, change to the _game quiz_ screen
@@ -203,6 +206,7 @@ window.onload = function() {
     resultBox.style.display = 'none';
     body.style.backgroundImage = 'url(doraemon.jpg)';
     startScreen.style.display = 'flex';
+    goHomeMenu();
   });
 
   // To make work _next question_ button
