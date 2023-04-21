@@ -189,5 +189,32 @@ In all other cases we just call getNewQuestion() function. And we connect this f
 We need to set a question number in the footer + assign yellow color to the ProgressTrack number when new question loaded (= this is the current question) ===> add the function _getNewQuestion()_
 
 
+----- setCorrect() -----
+This function adds points and change the color of the progresstrack to green
+===> works inside _nextQuestion()_ when the conditions are met; read about conditions in --&&--
+
+----- setWrong() -----
+This function changes the color of the progresstrack to red ===> works inside _nextQuestion()_ when the conditions are met;  read about conditions in --&&--
+
+--&&&--
+If its the last question we want to change current screen to the _result box_ but before that we also need to check if the last page question is right or wrong and if correct: setCorrect(), if wrong: setWrong(). And only after those conditions are checked and executed we move to the execution of the main condition - dispaly result box. 
+if (questionCounter > 9) {
+    if (userAnswer === currentQuestion.answer) {
+      setCorrect();
+    } else {
+      setWrong();
+    }
+    displayResultBox();
+    return
+  }
+
+We check if answer the answer is correct or wrong. If correct: setCorrect() + getNewQuestion(); if wrong: setWrong() + getNewQuestion();
+  if (userAnswer === currentQuestion.answer) {
+    setCorrect();
+    getNewQuestion();
+  } else {
+    setWrong();
+    getNewQuestion();
+  }
 
 

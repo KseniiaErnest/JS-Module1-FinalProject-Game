@@ -94,10 +94,24 @@ function nextQuestion() {
   }
 
   if (questionCounter > 9) {
+    if (userAnswer === currentQuestion.answer) {
+      setCorrect();
+    } else {
+      setWrong();
+    }
     displayResultBox();
     return
   }
-  getNewQuestion();
+
+
+  if (userAnswer === currentQuestion.answer) {
+    setCorrect();
+    getNewQuestion();
+  } else {
+    setWrong();
+    getNewQuestion();
+  }
+
   tunrColorsToDeafault();
 }
 
@@ -148,12 +162,6 @@ if (e.target.id === 'option1') {
 
 // Set palyers answer based on the selected option
 userAnswer = Number(e.target.id.replace('option', ''));
-
-// Get points if answer is correct
-if (userAnswer === currentQuestion.answer) {
-  score++;
-}
-
 }
 
 // --- To set color options to default --- call in _newQuestion()_ function
@@ -169,6 +177,16 @@ function changeTheNumberColor() {
   questionNumber.textContent = `Question ${questionCounter + 1} of 10`;
   progressTrack = document.querySelector(`#number${questionCounter + 1}`);
   progressTrack.style.backgroundColor = '#fad61d';
+}
+
+// ----- To get points and set color of the progresstrack when the answer is correct
+function setCorrect() {
+  score++;
+  progressTrack.style.backgroundColor = '#5F8D4E';
+}
+// ----- To set a color of the progresstrack when the answer is wrong
+function setWrong() {
+  progressTrack.style.backgroundColor = '#F62D14';
 }
 
 // ----------------------------------------------------------------
@@ -201,6 +219,7 @@ window.onload = function() {
   setAvaibleQuestions();
 //  2. We call _getNewQuestion()_ function to display questions and options
   getNewQuestion();
+
 
 
 
