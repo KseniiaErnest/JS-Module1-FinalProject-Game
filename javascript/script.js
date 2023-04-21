@@ -148,7 +148,11 @@ if (e.target.id === 'option1') {
 
 // Set palyers answer based on the selected option
 userAnswer = Number(e.target.id.replace('option', ''));
-console.log(userAnswer);
+
+// Get points if answer is correct
+if (userAnswer === currentQuestion.answer) {
+  score++;
+}
 
 }
 
