@@ -33,9 +33,14 @@ const time = document.querySelector('#time');
 
 const resultContent = document.querySelector('#result');
 // Once the game quiz is over the result content needed to be displayed;
-const btnPlayAgain = document.querySelector('#play-again-btn');
+const saveScore = document.querySelector('#save-score');
 // // To be able to play again once button clicked;
 const btnHome = document.querySelector('#home-btn');
+
+const userName = document.querySelector('#name-input');
+
+
+
 
 let questionCounter = 0;
 let currentQuestion;
@@ -218,114 +223,9 @@ window.onload = function() {
   option3.addEventListener('click', getResult);
   option4.addEventListener('click', getResult);
 
-
   // 1. We set all questions in _avaibleQuestions_ array 
   setAvaibleQuestions();
 //  2. We call _getNewQuestion()_ function to display questions and options
   getNewQuestion();
-
-
-
-
 }
 
-
-
-
-
-
-
-// When start button of the Start screen clicked, change to the Game screen + background
-// startButton.addEventListener('click', () => {
-//   startScreen.style.display = 'none';
-//   body.style.backgroundImage = 'url(pikachu.jpg)';
-//   quizGame.style.display = 'block';
-
-// });
-
-// // Function to load questions
-// function loadQuestions(index) {
-//   questionContent.textContent = `${index + 1}. ${questionsBank[index].question}`;
-//   option1.textContent = questionsBank[index].option1;
-//   option2.textContent = questionsBank[index].option2;
-//   option3.textContent = questionsBank[index].option3;
-//   option4.textContent = questionsBank[index].option4;
-// }
-
-// loadQuestions(4);
-
-// // Function when next button is clicked
-// btnNext.addEventListener('click', () => {
-//   quizGame.style.display = 'block';
-//   loadQuestions();
-
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function getRandomQuestionSet(amountofQuestions) {
-//   let qSet = [];
-
-//   while(qSet.length < amountofQuestions.length) {
-//     let randomIndex = Math.floor(Math.random() * questionsBank.length);
-    
-//     if (qSet.indexOf(randomIndex) === -1) {
-//       qSet.push(randomIndex);
-//     }
-//   }
-//   return questionsBank.filter( (element, ind) => qSet.indexOf(ind) > -1);
-// }
-
-
-// function generateRandomQuestions() {
-//   const randomNumber = Math.floor(Math.random() * questionsBank.length);
-
-//   let duplicateCount = 0;
-
-//   if (arrOfQuestions.length === 0) {
-//     questionIndex = randomNumber;
-//   } else {
-//     for (let i = 0; i < arrOfQuestions.length; i++) {
-//       if (randomNumber === arrOfQuestions[i]) {
-//         duplicateCount = 1;
-//       }
-//     }
-//     if (duplicateCount === 1) {
-//       generateRandomQuestions();
-//       return;
-//     } else {
-//       questionIndex = randomNumber;
-//     }
-//   }
-//   arrOfQuestions.push(randomNumber);
-//   return randomNumber;
-// }
-
-// loadQuestions();
-
-// loadQuestions();
-
-// function generateRandomQ () {
-
-//   for (let i = 0; i < questionsBank.length; i++) {
-//     let randomNum = Math.floor(Math.random() * questionsBank.length);
-
-//     if (arrOfQuestions.indexOf(randomNum) === -1) {
-//       arrOfQuestions.push(randomNum);
-//     } else {
-//       i--
-//     }
-//   }
-//   return arrOfQuestions;
-// }

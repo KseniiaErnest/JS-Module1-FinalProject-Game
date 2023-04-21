@@ -70,22 +70,6 @@ a:hover, a:visited {
   color: #f5bede;
 }
 
-#player-name {
-  font-size: 1.8rem;
-  color: #267aaa;
-  margin-bottom: 0.5rem;
-}
-
-#name-input {
-  font-size: 1.4rem;
-  margin-bottom: 1.8rem;
-  font-family: 'Anton', sans-serif;
-  background-color:#267aaa;
-  color: #f5bede;
-  text-align: center;
-  border-radius: 9px;
-  border: none;
-}
 
 /* -------------- Game Screen --------------------- */
 
@@ -200,7 +184,7 @@ text-align: center;
   font-size: 2rem;
 }
 
-#play-again-btn {
+#save-score {
 font-size: 1.4rem;
 background-color: #F62D14;
 padding: 0.7rem 1rem 0.7rem 1rem;
@@ -212,7 +196,7 @@ transition: all 2s;
 text-transform: uppercase;
 }
 
-#play-again-btn:hover {
+#save-score:hover {
   background-color: #000000;
   color: #F62D14;
   box-shadow: 5px 5px 0 0 #F62D14;
@@ -248,3 +232,27 @@ footer {
   margin-bottom: 0.5rem;
 }
 
+.input-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+#player-name {
+  font-size: 1.8rem;
+  color: #000000;
+}
+
+#name-input {
+  font-size: 1.4rem;
+  font-family: 'Anton', sans-serif;
+  background-color:#000000;
+  color:#F62D14;
+  text-align: center;
+  border-radius: 9px;
+  border: none;
+  padding: 0.5rem;
+}
