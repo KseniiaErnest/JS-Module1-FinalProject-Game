@@ -40,6 +40,7 @@ let questionCounter = 0;
 let currentQuestion;
 let avaibleQuestions = [];
 let score = 0;
+let userAnswer;
 
 
 // --- We push questions from _questionsBank_ into _avaibleQuestions_ array
@@ -144,6 +145,10 @@ if (e.target.id === 'option1') {
   btn2.style.backgroundColor = '#fdefa5';
   btn3.style.backgroundColor = '#fdefa5';
 }
+
+// Set palyers answer based on the selected option
+userAnswer = Number(e.target.id.replace('option', ''));
+console.log(userAnswer);
 
 }
 

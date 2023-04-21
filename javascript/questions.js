@@ -42,7 +42,7 @@ answer: 3
         option2: 'Satoru Gojo',
         option3: 'Sailor Moon',
         option4: 'Gon Freecss',
-        answer: 4 
+        answer: 3 
         },
 
         {
