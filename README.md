@@ -185,3 +185,9 @@ In all other cases we just call getNewQuestion() function. And we connect this f
 
 
 
+----- changeTheNumberColor() -----
+We need to set a question number in the footer + assign yellow color to the ProgressTrack number when new question loaded (= this is the current question) ===> add the function _getNewQuestion()_
+
+
+
+

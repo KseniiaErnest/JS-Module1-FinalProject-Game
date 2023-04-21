@@ -35,12 +35,14 @@ const resultContent = document.querySelector('#result');
 // Once the game quiz is over the result content needed to be displayed;
 const btnPlayAgain = document.querySelector('#play-again-btn');
 // // To be able to play again once button clicked;
+const btnHome = document.querySelector('#home-btn');
 
 let questionCounter = 0;
 let currentQuestion;
 let avaibleQuestions = [];
 let score = 0;
 let userAnswer;
+let progressTrack;
 
 
 // --- We push questions from _questionsBank_ into _avaibleQuestions_ array
@@ -54,7 +56,8 @@ for (let i = 0; i < questionsBank.length; i++) {
 // --- Set question number and question options
 function getNewQuestion() {
   // Set question number
-  questionNumber.textContent = `Question ${questionCounter + 1} of 10`;
+  // questionNumber.textContent = `Question ${questionCounter + 1} of 10`;
+  changeTheNumberColor();
 
   
   // Get random question
@@ -73,9 +76,6 @@ function getNewQuestion() {
   const index1 = avaibleQuestions.indexOf(questionIndex);
   // Remove _questionIndex_ from _avaibleQuestions_ array, so that the question does not repeat
   avaibleQuestions.splice(index1, 1);
- 
-  console.log(questionIndex);
-  console.log(avaibleQuestions);
 
 
   questionCounter++;
@@ -164,7 +164,12 @@ function tunrColorsToDeafault() {
   btn4.style.backgroundColor = '#fdefa5';
 }
 
-// --- When the last question answered and we clicke
+// --- To set the number of the question in the footer + color current question
+function changeTheNumberColor() {
+  questionNumber.textContent = `Question ${questionCounter + 1} of 10`;
+  progressTrack = document.querySelector(`#number${questionCounter + 1}`);
+  progressTrack.style.backgroundColor = '#fad61d';
+}
 
 // ----------------------------------------------------------------
 window.onload = function() {
@@ -173,6 +178,13 @@ window.onload = function() {
     startScreen.style.display = 'none';
     body.style.backgroundImage = 'url(pikachu.jpg)';
     quizGame.style.display = 'block';
+  });
+
+  btnHome.addEventListener('click', () => {
+    quizGame.style.display = 'none';
+    resultBox.style.display = 'none';
+    body.style.backgroundImage = 'url(doraemon.jpg)';
+    startScreen.style.display = 'flex';
   });
 
   // To make work _next question_ button
