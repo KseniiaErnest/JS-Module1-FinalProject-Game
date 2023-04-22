@@ -165,7 +165,7 @@ if (e.target.id === 'option1') {
   btn3.style.backgroundColor = '#fdefa5';
 }
 
-// Set palyers answer based on the selected option
+// Set players answer based on the selected option
 userAnswer = Number(e.target.id.replace('option', ''));
 }
 
