@@ -138,6 +138,10 @@ window.addEventListener('load', (event) => {
 
 
 function displayQuestion() {
+  questionNumber.textContent = `Question ${quiz.questionCounter + 1} of 10`;
+  quiz.progressTrack = document.querySelector(`#number${quiz.questionCounter + 1}`);
+  quiz.progressTrack.style.backgroundColor = '#fad61d';
+
   const questionCurrent = quiz.getNewQuestion();
   questionContent.textContent = questionCurrent.question;
 
@@ -145,11 +149,10 @@ option1.innerHTML = questionCurrent.option1;
 option2.innerHTML = questionCurrent.option2;
 option3.innerHTML = questionCurrent.option3;
 option4.innerHTML = questionCurrent.option4;
+
 }
 
 function nextQuestion() {
-  questionNumber.textContent = `Question ${quiz.questionCounter + 1} of 10`;
-
   if (quiz.questionCounter === 9) {
     btnNext.textContent = 'Check the score!';
   } else if (btn1.style.backgroundColor === 'rgb(253, 239, 165)' &&
@@ -162,11 +165,20 @@ function nextQuestion() {
 
   if (quiz.questionCounter > 9) {
     displayResultBox();
-    return
+    return;
+  }
+
+  if (quiz.userAnswer === quiz.currentQuestion.answer) {
+    quiz.score++;
+    quiz.progressTrack.style.backgroundColor = '#5F8D4E';
+    displayQuestion();
+  } else {
+    quiz.progressTrack.style.backgroundColor = '#F62D14';
+    displayQuestion();
   }
 
 
-  displayQuestion();
+  // displayQuestion();
 }
 
 
@@ -189,6 +201,12 @@ function setFinalScore() {
     resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${quiz.score}!`;
   }
 }
+
+// function changeTheNumberColor() {
+//   questionNumber.textContent = `Question ${quiz.questionCounter + 1} of 10`;
+//   progressTrack = document.querySelector(`#number${questionCounter + 1}`);
+//   progressTrack.style.backgroundColor = '#fad61d';
+// }
 
 
 
