@@ -1,3 +1,4 @@
+// trying to improve my code from quiz.js
 class Quiz {
   constructor(questions) {
     this.questions = questions;
@@ -16,6 +17,11 @@ class Quiz {
   this.currentQuestion = this.avaibleQuestions[randomIndex];
   this.avaibleQuestions.splice(randomIndex, 1);
   return this.currentQuestion;
+  }
+
+
+  isQuizOver() {
+    return this.questionCounter > 9;
   }
 
 
@@ -116,17 +122,29 @@ quiz.progressTrack.style.backgroundColor = '#fad61d';
 }
 
 function nextQuestion() {
-  if (quiz.questionCounter > 9) {
+  if (quiz.isQuizOver()) {
     btnNext.textContent = 'Check the score!';
   } else if (btn1.style.backgroundColor === 'rgb(253, 239, 165)' &&
   btn2.style.backgroundColor === 'rgb(253, 239, 165)' &&
   btn3.style.backgroundColor === 'rgb(253, 239, 165)' &&
   btn4.style.backgroundColor === 'rgb(253, 239, 165)') {
-    alert('Please select an option')
+    Swal.fire({
+      title: 'Please select an option!',
+      width: 600,
+      padding: '3em',
+      color: '#F62D14',
+      background: '#fff',
+      backdrop: `
+      rgb(250, 214, 29, 0.4)
+        url('https://media.tenor.com/5QUEXqdHMEkAAAAi/elixir.gif')
+        left top
+        no-repeat
+      `
+    })
     return;
   }
 
-  if (quiz.questionCounter > 9) {
+  if (quiz.isQuizOver()) {
     if (quiz.userAnswer === quiz.currentQuestion.answer) {
       setCorrect();
     } else {
@@ -211,95 +229,3 @@ function getResult(e) {
     btn3.style.backgroundColor = '#fdefa5';
     btn4.style.backgroundColor = '#fdefa5';
   }
-
-
-
-
-
-// shuffleQuestions() {
-//   for (let i = this.questions.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     const temp = this.questions[i];
-//     this.questions[i] = this.questions[j];
-//     this.questions[j] = temp;
-//   }
-// }
-
-// getCurrentQuestion() {
-//   this.shuffleQuestions();
-//   return this.questions[this.currentQuestionIndex];
-// }
-  
-
-  // getCurrentQuestion() {
-  //   return this.shuffledQuestionsArray[this.currentQuestionIndex];
-  // }
-
-  // getNextQuestion() {
-  //   this.currentQuestionIndex++;
-  //   return this.getCurrentQuestion();
-  // }
-
-  // checkAnswer(answer) {
-  //   const currentQuestion = this.getCurrentQuestion();
-  //   if (answer === currentQuestion.answer) {
-  //     this.score++;
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // isGameOver() {
-  //   return this.currentQuestionIndex >= this.questions.length;
-  // }
-
-
-
-// function changeTheNumberColor() {
-//   questionNumber.textContent = `Question ${quiz.questionCounter + 1} of 10`;
-//   progressTrack = document.querySelector(`#number${questionCounter + 1}`);
-//   progressTrack.style.backgroundColor = '#fad61d';
-// }
-
-
-
-
-
-
-
-// function displayQuestion() {
-//   if (quiz.isGameOver()) {
-//     showScore();
-//   } else {
-//     const questionContent = document.querySelector('#question-text');
-//     questionContent.innerHTML = quiz.getCurrentQuestion().question;
-
-// const option1 = document.querySelector('#option1');
-// const option2 = document.querySelector('#option2');
-// const option3 = document.querySelector('#option3');
-// const option4 = document.querySelector('#option4');
-
-// option1.innerHTML = quiz.getCurrentQuestion().option1;
-// option2.innerHTML = quiz.getCurrentQuestion().option2;
-// option3.innerHTML = quiz.getCurrentQuestion().option3;
-// option4.innerHTML = quiz.getCurrentQuestion().option4;
-//   }
-//   showProgress();
-// }
-
-
-
-// Shows the number of the question in the footer ---> call it inside of displayQuestion
-// function showProgress() {
-//   const currentQuestionNumber = quiz.currentQuestionIndex + 1;
-//   const questionNumber = document.querySelector('#number-question');
-//   questionNumber.innerHTML = `Question ${currentQuestionNumber} of ${quiz.questions.length}`;
-// }
-
-
-
-
-
-
-
-
