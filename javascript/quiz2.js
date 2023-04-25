@@ -35,7 +35,7 @@ class Player {
   }
 
   updateScore(score) {
-    this.score += score;
+    this.score ++;
   }
 }
 
@@ -90,16 +90,23 @@ window.addEventListener('load', (event) => {
     body.style.backgroundImage = 'url(pikachu.jpg)';
     quizGame.style.display = 'block';
   });
-
+  
   displayQuestion();
 
   btnNext.addEventListener('click', nextQuestion);
+
+  btnHome.addEventListener('click', () => {
+    quizGame.style.display = 'none';
+    resultBox.style.display = 'none';
+    body.style.backgroundImage = 'url(doraemon.jpg)';
+    startScreen.style.display = 'flex';
+    goHomeMenu();
+  })
 
   option1.addEventListener('click', getResult);
   option2.addEventListener('click', getResult);
   option3.addEventListener('click', getResult);
   option4.addEventListener('click', getResult);
-
 
 })
 
@@ -107,7 +114,6 @@ window.addEventListener('load', (event) => {
 function displayQuestion() {
   questionNumber.textContent = `Question ${quiz.questionCounter + 1} of 10`;
   quiz.progressTrack = document.querySelector(`#number${quiz.questionCounter + 1}`);
-  // quiz.progressTrack.style.backgroundColor = '#fad61d';
 
   const questionCurrent = quiz.getNewQuestion();
   questionContent.textContent = questionCurrent.question;
@@ -124,10 +130,10 @@ quiz.progressTrack.style.backgroundColor = '#fad61d';
 function nextQuestion() {
   if (quiz.isQuizOver()) {
     btnNext.textContent = 'Check the score!';
-  } else if (btn1.style.backgroundColor === 'rgb(253, 239, 165)' &&
-  btn2.style.backgroundColor === 'rgb(253, 239, 165)' &&
-  btn3.style.backgroundColor === 'rgb(253, 239, 165)' &&
-  btn4.style.backgroundColor === 'rgb(253, 239, 165)') {
+  } else if (btn1.style.backgroundColor !== 'rgb(250, 214, 29)' &&
+  btn2.style.backgroundColor !== 'rgb(250, 214, 29)' &&
+  btn3.style.backgroundColor !== 'rgb(250, 214, 29)' &&
+  btn4.style.backgroundColor !== 'rgb(250, 214, 29)') {
     Swal.fire({
       title: 'Please select an option!',
       width: 600,
@@ -146,34 +152,25 @@ function nextQuestion() {
 
   if (quiz.isQuizOver()) {
     if (quiz.userAnswer === quiz.currentQuestion.answer) {
-      setCorrect();
+      player.updateScore();
+      quiz.progressTrack.style.backgroundColor = '#5F8D4E';
     } else {
-      setWrong();
+      quiz.progressTrack.style.backgroundColor = '#F62D14';
     }
     displayResultBox();
     return;
   }
 
   if (quiz.userAnswer === quiz.currentQuestion.answer) {
-    setCorrect();
+    player.updateScore();
+    quiz.progressTrack.style.backgroundColor = '#5F8D4E';
     displayQuestion();
   } else {
-    setWrong();
+    quiz.progressTrack.style.backgroundColor = '#F62D14';
     displayQuestion();
   }
 
-
   turnColorsToDeafault()
-
-}
-
-function setCorrect() {
-  quiz.score++;
-  quiz.progressTrack.style.backgroundColor = '#5F8D4E';
-}
-
-function setWrong() {
-  quiz.progressTrack.style.backgroundColor = '#F62D14';
 }
 
 
@@ -186,14 +183,14 @@ function displayResultBox() {
 }
 
 function setFinalScore() {
-  if (quiz.score > 7) {
-    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${quiz.score}!`
-  } else if (quiz.score >= 5 && quiz.score <= 7) {
-    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${quiz.score}!`;
-  } else if (quiz.score >= 3 && quiz.score < 5) {
-    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${quiz.score}!`;
+  if (player.score > 7) {
+    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${player.score}!`
+  } else if (player.score >= 5 && player.score <= 7) {
+    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${player.score}!`;
+  } else if (player.score >= 3 && player.score < 5) {
+    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${player.score}!`;
   } else {
-    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${quiz.score}!`;
+    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${player.score}!`;
   }
 }
 
@@ -228,4 +225,8 @@ function getResult(e) {
     btn2.style.backgroundColor = '#fdefa5';
     btn3.style.backgroundColor = '#fdefa5';
     btn4.style.backgroundColor = '#fdefa5';
+  }
+
+  function goHomeMenu() {
+    window.location.reload();
   }

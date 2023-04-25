@@ -29,7 +29,7 @@ class Player {
   }
 
   updateScore(score) {
-    this.score += score;
+    this.score ++;
   }
 }
 
@@ -128,19 +128,23 @@ function nextQuestion() {
 
   if (quiz.questionCounter > 9) {
     if (quiz.userAnswer === quiz.currentQuestion.answer) {
-      setCorrect();
+    player.updateScore();
+    quiz.progressTrack.style.backgroundColor = '#5F8D4E';
     } else {
-      setWrong();
+      quiz.progressTrack.style.backgroundColor = '#F62D14';
     }
     displayResultBox();
     return;
   }
 
   if (quiz.userAnswer === quiz.currentQuestion.answer) {
-    setCorrect();
+    // setCorrect();
+    player.updateScore();
+    quiz.progressTrack.style.backgroundColor = '#5F8D4E';
     displayQuestion();
   } else {
-    setWrong();
+    // setWrong();
+    quiz.progressTrack.style.backgroundColor = '#F62D14';
     displayQuestion();
   }
 
@@ -149,14 +153,14 @@ function nextQuestion() {
 
 }
 
-function setCorrect() {
-  quiz.score++;
-  quiz.progressTrack.style.backgroundColor = '#5F8D4E';
-}
+// function setCorrect() {
+//   quiz.score++;
+//   quiz.progressTrack.style.backgroundColor = '#5F8D4E';
+// }
 
-function setWrong() {
-  quiz.progressTrack.style.backgroundColor = '#F62D14';
-}
+// function setWrong() {
+//   quiz.progressTrack.style.backgroundColor = '#F62D14';
+// }
 
 
 function displayResultBox() {
@@ -168,14 +172,14 @@ function displayResultBox() {
 }
 
 function setFinalScore() {
-  if (quiz.score > 7) {
-    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${quiz.score}!`
-  } else if (quiz.score >= 5 && quiz.score <= 7) {
-    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${quiz.score}!`;
-  } else if (quiz.score >= 3 && quiz.score < 5) {
-    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${quiz.score}!`;
+  if (player.score > 7) {
+    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${player.score}!`
+  } else if (player.score >= 5 && player.score <= 7) {
+    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${player.score}!`;
+  } else if (player.score >= 3 && player.score < 5) {
+    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${player.score}!`;
   } else {
-    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${quiz.score}!`;
+    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${player.score}!`;
   }
 }
 
