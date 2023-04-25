@@ -1,4 +1,7 @@
 'use strict'
+const quiz = new Quiz(questionsBank);
+const player = new Player('Player 1');
+
 //--Accessing the HTML elements that will be manupilated later
 const body = document.querySelector('body');
 const startScreen = document.querySelector('.start-container');
@@ -41,99 +44,96 @@ const userName = document.querySelector('#name-input');
 
 
 
-
-let questionCounter = 0;
-let currentQuestion;
-let avaibleQuestions = [];
-let score = 0;
-let userAnswer;
-let progressTrack;
-
-
-// --- We push questions from _questionsBank_ into _avaibleQuestions_ array
-function setAvaibleQuestions() {
-// const totalQuestions = questionsBank.length;
-for (let i = 0; i < questionsBank.length; i++) {
-  avaibleQuestions.push(questionsBank[i]);
-}
-}
-
-// --- Set question number and question options
-function getNewQuestion() {
-  // Set question number
-  // questionNumber.textContent = `Question ${questionCounter + 1} of 10`;
-  changeTheNumberColor();
-
+window.addEventListener('load', (event) => {
+  startButton.addEventListener('click', () => {
+    startScreen.style.display = 'none';
+    body.style.backgroundImage = 'url(pikachu.jpg)';
+    quizGame.style.display = 'block';
+  });
   
-  // Get random question
-  const questionIndex = avaibleQuestions[Math.floor(Math.random() * avaibleQuestions.length)];
-  currentQuestion = questionIndex;
-  // Set question text
-  questionContent.textContent = currentQuestion.question;
-  
-  // Set options text
-  option1.textContent = currentQuestion.option1;
-  option2.textContent = currentQuestion.option2;
-  option3.textContent = currentQuestion.option3;
-  option4.textContent = currentQuestion.option4;
+  displayQuestion();
 
-  // Get the position of _questionIndex_ from the _avaibleQuestions_ array
-  const index1 = avaibleQuestions.indexOf(questionIndex);
-  // Remove _questionIndex_ from _avaibleQuestions_ array, so that the question does not repeat
-  avaibleQuestions.splice(index1, 1);
+  btnNext.addEventListener('click', nextQuestion);
+
+  btnHome.addEventListener('click', () => {
+    quizGame.style.display = 'none';
+    resultBox.style.display = 'none';
+    body.style.backgroundImage = 'url(doraemon.jpg)';
+    startScreen.style.display = 'flex';
+    goHomeMenu();
+  })
+
+  option1.addEventListener('click', getResult);
+  option2.addEventListener('click', getResult);
+  option3.addEventListener('click', getResult);
+  option4.addEventListener('click', getResult);
+
+})
 
 
-  questionCounter++;
+function displayQuestion() {
+  questionNumber.textContent = `Question ${quiz.questionCounter + 1} of 10`;
+  quiz.progressTrack = document.querySelector(`#number${quiz.questionCounter + 1}`);
+
+  const questionCurrent = quiz.getNewQuestion();
+  questionContent.textContent = questionCurrent.question;
+
+option1.innerHTML = questionCurrent.option1;
+option2.innerHTML = questionCurrent.option2;
+option3.innerHTML = questionCurrent.option3;
+option4.innerHTML = questionCurrent.option4;
+
+quiz.progressTrack.style.backgroundColor = '#fad61d';
+
 }
 
-// --- To display the next question
 function nextQuestion() {
-  if (questionCounter === 9) {
-    btnNext.textContent = 'Check the score!'
-  } else if (btn1.style.backgroundColor === 'rgb(253, 239, 165)' &&
-  btn2.style.backgroundColor === 'rgb(253, 239, 165)' &&
-  btn3.style.backgroundColor === 'rgb(253, 239, 165)' &&
-  btn4.style.backgroundColor === 'rgb(253, 239, 165)') {
-    alert('Please select an option')
+  if (quiz.isQuizOver()) {
+    btnNext.textContent = 'Check the score!';
+  } else if (btn1.style.backgroundColor !== 'rgb(250, 214, 29)' &&
+  btn2.style.backgroundColor !== 'rgb(250, 214, 29)' &&
+  btn3.style.backgroundColor !== 'rgb(250, 214, 29)' &&
+  btn4.style.backgroundColor !== 'rgb(250, 214, 29)') {
+    Swal.fire({
+      title: 'Please select an option!',
+      width: 600,
+      padding: '3em',
+      color: '#F62D14',
+      background: '#fff',
+      backdrop: `
+      rgb(250, 214, 29, 0.4)
+        url('https://media.tenor.com/5QUEXqdHMEkAAAAi/elixir.gif')
+        left top
+        no-repeat
+      `
+    })
     return;
   }
 
-  if (questionCounter > 9) {
-    if (userAnswer === currentQuestion.answer) {
-      setCorrect();
+  if (quiz.isQuizOver()) {
+    if (quiz.userAnswer === quiz.currentQuestion.answer) {
+      player.updateScore();
+      quiz.progressTrack.style.backgroundColor = '#5F8D4E';
     } else {
-      setWrong();
+      quiz.progressTrack.style.backgroundColor = '#F62D14';
     }
     displayResultBox();
-    return
+    return;
   }
 
-
-  if (userAnswer === currentQuestion.answer) {
-    setCorrect();
-    getNewQuestion();
+  if (quiz.userAnswer === quiz.currentQuestion.answer) {
+    player.updateScore();
+    quiz.progressTrack.style.backgroundColor = '#5F8D4E';
+    displayQuestion();
   } else {
-    setWrong();
-    getNewQuestion();
+    quiz.progressTrack.style.backgroundColor = '#F62D14';
+    displayQuestion();
   }
 
-  tunrColorsToDeafault();
+  turnColorsToDeafault()
 }
 
-// --- Set final score 
-function setFinalScore() {
-  if (score > 7) {
-    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${score}!`
-  } else if (score >= 5 && score <= 7) {
-    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${score}!`;
-  } else if (score >= 3 && score < 5) {
-    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${score}!`;
-  } else {
-    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${score}!`;
-  }
-}
 
-// --- Dispaly final score screen (change screens)
 function displayResultBox() {
   quizQuestions.style.display = 'none';
   resultBox.style.display = 'block';
@@ -142,90 +142,51 @@ function displayResultBox() {
   setFinalScore();
 }
 
-// --- To get e result of the current attempt question
+function setFinalScore() {
+  if (player.score > 7) {
+    resultContent.innerHTML = `Wow! You are a real anime nerd! <br> Your score is ${player.score}!`
+  } else if (player.score >= 5 && player.score <= 7) {
+    resultContent.innerHTML = `Not bad at all!!! <br> Your score is ${player.score}!`;
+  } else if (player.score >= 3 && player.score < 5) {
+    resultContent.innerHTML = `Maybe you need to watch more anime... <br> Your score is ${player.score}!`;
+  } else {
+    resultContent.innerHTML = `Have you ever watched anime at all?!?! <br> Your score is ${player.score}!`;
+  }
+}
+
 function getResult(e) {
-const parentEl = e.target.parentElement;
-parentEl.style.backgroundColor = '#fad61d';
+  const parentEl = e.target.parentElement;
+  parentEl.style.backgroundColor = '#fad61d';
+  
+  if (e.target.id === 'option1') {
+    btn2.style.backgroundColor = '#fdefa5';
+    btn3.style.backgroundColor = '#fdefa5';
+    btn4.style.backgroundColor = '#fdefa5';
+  } else if (e.target.id === 'option2') {
+    btn1.style.backgroundColor = '#fdefa5';
+    btn3.style.backgroundColor = '#fdefa5';
+    btn4.style.backgroundColor = '#fdefa5';
+  } else if (e.target.id === 'option3') {
+    btn1.style.backgroundColor = '#fdefa5';
+    btn2.style.backgroundColor = '#fdefa5';
+    btn4.style.backgroundColor = '#fdefa5';
+  } else if (e.target.id === 'option4') {
+    btn1.style.backgroundColor = '#fdefa5';
+    btn2.style.backgroundColor = '#fdefa5';
+    btn3.style.backgroundColor = '#fdefa5';
+  }
+  
+  // Set players answer based on the selected option
+  quiz.userAnswer = Number(e.target.id.replace('option', ''));
+  }
 
-if (e.target.id === 'option1') {
-  btn2.style.backgroundColor = '#fdefa5';
-  btn3.style.backgroundColor = '#fdefa5';
-  btn4.style.backgroundColor = '#fdefa5';
-} else if (e.target.id === 'option2') {
-  btn1.style.backgroundColor = '#fdefa5';
-  btn3.style.backgroundColor = '#fdefa5';
-  btn4.style.backgroundColor = '#fdefa5';
-} else if (e.target.id === 'option3') {
-  btn1.style.backgroundColor = '#fdefa5';
-  btn2.style.backgroundColor = '#fdefa5';
-  btn4.style.backgroundColor = '#fdefa5';
-} else if (e.target.id === 'option4') {
-  btn1.style.backgroundColor = '#fdefa5';
-  btn2.style.backgroundColor = '#fdefa5';
-  btn3.style.backgroundColor = '#fdefa5';
-}
+  function turnColorsToDeafault() {
+    btn1.style.backgroundColor = '#fdefa5';
+    btn2.style.backgroundColor = '#fdefa5';
+    btn3.style.backgroundColor = '#fdefa5';
+    btn4.style.backgroundColor = '#fdefa5';
+  }
 
-// Set players answer based on the selected option
-userAnswer = Number(e.target.id.replace('option', ''));
-}
-
-// --- To set color options to default --- call in _newQuestion()_ function
-function tunrColorsToDeafault() {
-  btn1.style.backgroundColor = '#fdefa5';
-  btn2.style.backgroundColor = '#fdefa5';
-  btn3.style.backgroundColor = '#fdefa5';
-  btn4.style.backgroundColor = '#fdefa5';
-}
-
-// --- To set the number of the question in the footer + color current question
-function changeTheNumberColor() {
-  questionNumber.textContent = `Question ${questionCounter + 1} of 10`;
-  progressTrack = document.querySelector(`#number${questionCounter + 1}`);
-  progressTrack.style.backgroundColor = '#fad61d';
-}
-
-// ----- To get points and set color of the progresstrack when the answer is correct
-function setCorrect() {
-  score++;
-  progressTrack.style.backgroundColor = '#5F8D4E';
-}
-// ----- To set a color of the progresstrack when the answer is wrong
-function setWrong() {
-  progressTrack.style.backgroundColor = '#F62D14';
-}
-
-function goHomeMenu() {
-  window.location.reload();
-}
-// ----------------------------------------------------------------
-window.onload = function() {
-  // _Lets Start_ button is clicked, change to the _game quiz_ screen
-  startButton.addEventListener('click', () => {
-    startScreen.style.display = 'none';
-    body.style.backgroundImage = 'url(pikachu.jpg)';
-    quizGame.style.display = 'block';
-  });
-
-  btnHome.addEventListener('click', () => {
-    quizGame.style.display = 'none';
-    resultBox.style.display = 'none';
-    body.style.backgroundImage = 'url(doraemon.jpg)';
-    startScreen.style.display = 'flex';
-    goHomeMenu();
-  });
-
-  // To make work _next question_ button
-  btnNext.addEventListener('click', nextQuestion);
-
-  //
-  option1.addEventListener('click', getResult);
-  option2.addEventListener('click', getResult);
-  option3.addEventListener('click', getResult);
-  option4.addEventListener('click', getResult);
-
-  // 1. We set all questions in _avaibleQuestions_ array 
-  setAvaibleQuestions();
-//  2. We call _getNewQuestion()_ function to display questions and options
-  getNewQuestion();
-}
-
+  function goHomeMenu() {
+    window.location.reload();
+  }
