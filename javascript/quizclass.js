@@ -20,7 +20,7 @@ class Quiz {
 
 
   isQuizOver() {
-    return this.questionCounter > 9;
+    return this.questionCounter === 9;
   }
 
 

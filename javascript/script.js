@@ -1,14 +1,16 @@
 'use strict'
 const quiz = new Quiz(questionsBank);
-const player = new Player('Player 1');
+const player = new Player(document.querySelector('#name-input').value);
 
 //--Accessing the HTML elements that will be manupilated later
 const body = document.querySelector('body');
 const startScreen = document.querySelector('.start-container');
-const startButton = document.querySelector('.btn');
+const startButton = document.querySelector('#play-btn');
 const quizQuestions = document.querySelector('#quiz-questions'); 
 const quizGame = document.querySelector('#quiz-game');
 const resultBox = document.querySelector('#result-box');
+const scoreContainer = document.querySelector('#score-storage-container')
+const checkScorebtn = document.querySelector('#check-score-btn');
 
 const questionContent = document.querySelector('#question-text')
 // So we can dynamically change questions content;
@@ -40,7 +42,7 @@ const saveScore = document.querySelector('#save-score');
 // // To be able to play again once button clicked;
 const btnHome = document.querySelector('#home-btn');
 
-const userName = document.querySelector('#name-input');
+// const userName = document.querySelector('#name-input').value;
 
 
 
@@ -49,7 +51,13 @@ window.addEventListener('load', (event) => {
     startScreen.style.display = 'none';
     body.style.backgroundImage = 'url(pikachu.jpg)';
     quizGame.style.display = 'block';
+    scoreContainer.style.display = 'none';
   });
+
+  checkScorebtn.addEventListener('click', () => {
+    scoreContainer.style.display = 'block';
+  });
+
   
   displayQuestion();
 
@@ -68,7 +76,10 @@ window.addEventListener('load', (event) => {
   option3.addEventListener('click', getResult);
   option4.addEventListener('click', getResult);
 
+  saveScore.addEventListener('click', saveNameAndScore);
+
 })
+
 
 
 function displayQuestion() {
@@ -110,7 +121,7 @@ function nextQuestion() {
     return;
   }
 
-  if (quiz.isQuizOver()) {
+  if (quiz.questionCounter > 9) {
     if (quiz.userAnswer === quiz.currentQuestion.answer) {
       player.updateScore();
       quiz.progressTrack.style.backgroundColor = '#5F8D4E';
@@ -140,6 +151,7 @@ function displayResultBox() {
   questionNumber.textContent = 'Anime Quiz is completed';
 
   setFinalScore();
+
 }
 
 function setFinalScore() {
@@ -189,4 +201,17 @@ function getResult(e) {
 
   function goHomeMenu() {
     window.location.reload();
+  }
+
+  function saveNameAndScore() {
+  player.name = document.querySelector('#name-input').value;
+  const playerData = {
+    playerName: player.name,
+    playerScore: player.score
+  };
+
+  localStorage.setItem('playerData', JSON.stringify(playerData));
+  
+  const savedData = JSON.parse(localStorage.getItem('playerData'));
+  return
   }

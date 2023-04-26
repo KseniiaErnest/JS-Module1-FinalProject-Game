@@ -13,13 +13,22 @@
 <body>
 
   <main>
+    <div id="score-storage-container">
+      <h2>Score</h2>
+      <p id="score-text"></p>
+
+    </div>
 
   <div class="start-container">
     <h1>Anime Quiz Game</h1>
-    <button class="btn">Lets start!</button>
-</div>
-
-
+    <div class="input-field">
+      <label id="player-name">Your name</label>
+      <input type="text" name="name" id="name-input">
+    </div>
+    <div>
+    <button class="btn" id="play-btn">Lets start!</button>
+    <button class="btn" id="check-score-btn">Score</button>
+  </div>
 </div>
 
 <!-- Game Screen -->
@@ -58,10 +67,6 @@
   <div id="result-box">
     <div class="positioning">
     <p id="result">Result Text</p>
-    <div class="input-field">
-    <label id="player-name">Your name</label>
-    <input type="text" name="name" id="name-input">
-  </div>
   <div>
     <button id="save-score">Save score</button>
     <button id="home-btn">Start menu<button></button>

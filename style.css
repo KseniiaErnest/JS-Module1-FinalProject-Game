@@ -33,6 +33,7 @@ main {
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  position: relative;
 }
 .start-container {
   width: 30%;
@@ -61,16 +62,36 @@ padding: 1rem;
   border-radius: 11px;
   background-color: #267aaa;
   color: #f5bede;
+  margin-right: 1.4rem;
+  cursor: pointer;
 }
 
-a:link, a:active {
+/* a:link, a:active {
   text-decoration: none;
   color: #f5bede;
 }
 
 a:hover, a:visited {
   color: #f5bede;
+} */
+
+#score-storage-container {
+  display: none;
+  background-color: #267aaa;
+  color: #f5bede;
+  width: 25rem;
+  height: 15rem;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  border-radius: 15px;
+  text-align: center;
 }
+
+#score-storage-container h2 {
+  margin-top: 0.5rem;
+}
+
 
 
 /* -------------- Game Screen --------------------- */
@@ -78,7 +99,7 @@ a:hover, a:visited {
 #quiz-game {
   display: none;
   background-color: #E19720 ;
-  max-width: 60rem;
+  width: 60rem;
   border-radius: 11px;
   padding: 1.4rem;
   box-shadow: 12px 12px 15px 9px hsl(0, 0%, 0%, 0.1);
@@ -239,20 +260,20 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2.4rem;
 }
 
 
 #player-name {
   font-size: 1.8rem;
-  color: #000000;
+  color: #267aaa;
 }
 
 #name-input {
   font-size: 1.4rem;
   font-family: 'Anton', sans-serif;
-  background-color:#000000;
-  color:#F62D14;
+  background-color:#267aaa;
+  color:#f5bede;
   text-align: center;
   border-radius: 9px;
   border: none;
