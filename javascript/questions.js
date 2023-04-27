@@ -108,6 +108,24 @@ answer: 3
                       answer: 3 
                       },
 
+                      {
+                        question: `Who has the nickname of 'one punch man'?`,
+                        option1: 'Saitama',
+                        option2: 'Naruto',
+                        option3: 'Satoru Gojo',
+                        option4: 'Renji Abarai',
+                        answer: 1 
+                        },
+
+                        {
+                          question: `Which anime does Ichigo Kurosaki belong to?`,
+                          option1: 'Pockemon',
+                          option2: 'Naruto',
+                          option3: 'Bleach',
+                          option4: 'Chainsaw man',
+                          answer: 3 
+                          }
+
 
 
 ]

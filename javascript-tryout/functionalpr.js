@@ -228,4 +228,3 @@ window.onload = function() {
 //  2. We call _getNewQuestion()_ function to display questions and options
   getNewQuestion();
 }
-

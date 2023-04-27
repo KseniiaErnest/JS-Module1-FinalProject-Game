@@ -36,7 +36,7 @@ main {
   position: relative;
 }
 .start-container {
-  width: 30%;
+  width: 30rem;
   height: 20rem;
   background-color: #f5bede;
   display: flex;
@@ -115,8 +115,6 @@ a:hover, a:visited {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 1.8rem;
-  
-
 }
 
 .numbers {
@@ -282,12 +280,6 @@ footer {
 
 /* Responsive design */
 
-/* @media all and (max-width: 107em) {
-  #quiz-game {
-    width: 60%;
-  }
-} */
-
 @media all and (max-width: 73em) {
   #quiz-game {
     max-width: 50rem;
@@ -350,6 +342,10 @@ footer {
 }
 
 @media all and (max-width: 52em) {
+  .start-container {
+    max-width: 28rem;
+  }
+
   #quiz-game {
     max-width: 44rem;
   }
@@ -359,20 +355,20 @@ footer {
   }
 
   .numbers {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.2rem;
     font-weight: normal;
     }
 
     #question-text {
       height: 5rem;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
     }
 
     .button {
-      width: 11rem;
-      font-size: 0.9rem;
+      width: 14rem;
+      font-size: 1rem;
     }
 
     #btn-next {
@@ -405,9 +401,9 @@ footer {
         } 
 } 
 
-@media all and (max-width: 33em) {
+@media all and (max-width: 40em) {
   .start-container {
-    max-width: 30rem;
+    max-width: 24rem;
     height: 16rem;
   }
 
@@ -419,9 +415,20 @@ footer {
     padding: 0.6rem 0.8rem;
     font-size: 1.2rem;
   }
+
+  .numbers {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: normal;
+    }
+
+    .button {
+      width: 12rem;
+    }
 } 
 
-@media all and (max-width: 30em) {
+@media all and (max-width: 34em) {
   .opt {
     display: flex;
     flex-direction: column;
@@ -434,4 +441,30 @@ footer {
     font-size: 0.8rem;
     font-weight: normal;
     }
+
+    #question-text {
+      height: 4rem;
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .button {
+      font-size: 1rem;
+      padding: 0.3rem;
+    }
+
+    #game-progress {
+      display: grid;;
+      grid-template-columns: repeat(5, auto);
+      justify-content:space-around;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .numbers {
+      width: 2.2rem;
+      height: 2.2rem;
+      font-size: 1rem;
+      }
+    
 }

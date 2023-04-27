@@ -1,6 +1,6 @@
 'use strict'
 const quiz = new Quiz(questionsBank);
-const player = new Player(document.querySelector('#name-input').value);
+const player = new Player(name);
 
 //--Accessing the HTML elements that will be manupilated later
 const body = document.querySelector('body');
@@ -9,8 +9,6 @@ const startButton = document.querySelector('#play-btn');
 const quizQuestions = document.querySelector('#quiz-questions'); 
 const quizGame = document.querySelector('#quiz-game');
 const resultBox = document.querySelector('#result-box');
-const scoreContainer = document.querySelector('#score-storage-container')
-const checkScorebtn = document.querySelector('#check-score-btn');
 
 const questionContent = document.querySelector('#question-text')
 // So we can dynamically change questions content;
@@ -32,17 +30,13 @@ const btnNext = document.querySelector('#btn-next');
 
 const questionNumber = document.querySelector('#number-question');
 // To dynamically change question numbers and didplay them;
-
-const time = document.querySelector('#time');
-// To change timer to 00:00 when the result box is diplayed;
-
-const resultContent = document.querySelector('#result');
 // Once the game quiz is over the result content needed to be displayed;
-const saveScore = document.querySelector('#save-score');
+const resultContent = document.querySelector('#result');
 // // To be able to play again once button clicked;
 const btnHome = document.querySelector('#home-btn');
 
-// const userName = document.querySelector('#name-input').value;
+const selectedColor = 'rgb(250, 214, 29)';
+
 
 
 
@@ -51,13 +45,7 @@ window.addEventListener('load', (event) => {
     startScreen.style.display = 'none';
     body.style.backgroundImage = 'url(pikachu.jpg)';
     quizGame.style.display = 'block';
-    scoreContainer.style.display = 'none';
   });
-
-  checkScorebtn.addEventListener('click', () => {
-    scoreContainer.style.display = 'block';
-  });
-
   
   displayQuestion();
 
@@ -76,10 +64,10 @@ window.addEventListener('load', (event) => {
   option3.addEventListener('click', getResult);
   option4.addEventListener('click', getResult);
 
-  saveScore.addEventListener('click', saveNameAndScore);
 
-})
+});
 
+//----------------------------------------------------------------------------------//
 
 
 function displayQuestion() {
@@ -94,17 +82,17 @@ option2.innerHTML = questionCurrent.option2;
 option3.innerHTML = questionCurrent.option3;
 option4.innerHTML = questionCurrent.option4;
 
-quiz.progressTrack.style.backgroundColor = '#fad61d';
+quiz.progressTrack.style.backgroundColor = selectedColor;
 
 }
 
 function nextQuestion() {
   if (quiz.isQuizOver()) {
     btnNext.textContent = 'Check the score!';
-  } else if (btn1.style.backgroundColor !== 'rgb(250, 214, 29)' &&
-  btn2.style.backgroundColor !== 'rgb(250, 214, 29)' &&
-  btn3.style.backgroundColor !== 'rgb(250, 214, 29)' &&
-  btn4.style.backgroundColor !== 'rgb(250, 214, 29)') {
+  } else if (btn1.style.backgroundColor !== selectedColor &&
+  btn2.style.backgroundColor !== selectedColor &&
+  btn3.style.backgroundColor !== selectedColor &&
+  btn4.style.backgroundColor !== selectedColor) {
     Swal.fire({
       title: 'Please select an option!',
       width: 600,
@@ -143,6 +131,7 @@ function nextQuestion() {
 
   turnColorsToDeafault()
 }
+
 
 
 function displayResultBox() {
@@ -201,17 +190,4 @@ function getResult(e) {
 
   function goHomeMenu() {
     window.location.reload();
-  }
-
-  function saveNameAndScore() {
-  player.name = document.querySelector('#name-input').value;
-  const playerData = {
-    playerName: player.name,
-    playerScore: player.score
-  };
-
-  localStorage.setItem('playerData', JSON.stringify(playerData));
-  
-  const savedData = JSON.parse(localStorage.getItem('playerData'));
-  return
   }
